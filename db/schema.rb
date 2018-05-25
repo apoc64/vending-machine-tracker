@@ -16,10 +16,10 @@ ActiveRecord::Schema.define(version: 20180525162217) do
   enable_extension "plpgsql"
 
   create_table "machine_snacks", force: :cascade do |t|
-    t.bigint "snacks_id"
-    t.bigint "machines_id"
-    t.index ["machines_id"], name: "index_machine_snacks_on_machines_id"
-    t.index ["snacks_id"], name: "index_machine_snacks_on_snacks_id"
+    t.bigint "snack_id"
+    t.bigint "machine_id"
+    t.index ["machine_id"], name: "index_machine_snacks_on_machine_id"
+    t.index ["snack_id"], name: "index_machine_snacks_on_snack_id"
   end
 
   create_table "machines", force: :cascade do |t|
@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(version: 20180525162217) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "machine_snacks", "machines", column: "machines_id"
-  add_foreign_key "machine_snacks", "snacks", column: "snacks_id"
+  add_foreign_key "machine_snacks", "machines"
+  add_foreign_key "machine_snacks", "snacks"
   add_foreign_key "machines", "owners"
   add_foreign_key "machines", "snacks", column: "snacks_id"
 end
